@@ -113,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Song> getAllSong(String keyword) {
-        ArrayList<Song> notes = new ArrayList<Song>();
+        ArrayList<Song> songs = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_ID, COLUMN_TITLE};
@@ -125,14 +125,17 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                String noteContent = cursor.getString(1);
-                Song song = new Song(id, noteContent);
-                notes.add(song);
+                String title = cursor.getString(1);
+                String singer = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int star = cursor.getInt(4);
+                Song song = new Song(title, singer, year, star);
+                songs.add(song);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return notes;
+        return songs;
     }
 }
 

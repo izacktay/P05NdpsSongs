@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, SecondActivity.class);
-                startActivityForResult(i);
+                startActivityForResult(i, 9);
 
             }
         });
@@ -74,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return stars;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 9){
+            btnInsert.performClick();
+        }
     }
 
 }
