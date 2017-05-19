@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">P05 NdpsSongs</string>
+    <string name="show_songs">Show all songs with 5 stars</string>
 </resources>
