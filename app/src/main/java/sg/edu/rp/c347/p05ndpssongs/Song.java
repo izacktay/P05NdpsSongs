@@ -1,10 +1,12 @@
 package sg.edu.rp.c347.p05ndpssongs;
 
+import java.io.Serializable;
+
 /**
  * Created by 15017612 on 19/5/2017.
  */
 
-public class Song {
+public class Song implements Serializable{
 
     private int _id;
     private String title;
@@ -39,6 +41,11 @@ public class Song {
     public int getStars(){
         return stars;
     }
+
+//    @Override
+//    public String toString() {
+//        return "ID:" + _id + ", " + title;
+//    }
 
 
 

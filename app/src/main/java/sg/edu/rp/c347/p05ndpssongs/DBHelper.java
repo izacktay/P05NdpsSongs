@@ -66,8 +66,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<String> getAllSongs() {
-        ArrayList<String> notes = new ArrayList<String>();
+    public ArrayList<Song> getAllSongs() {
+        ArrayList<Song> songs = new ArrayList<Song>();
 
         String selectQuery = "SELECT " + COLUMN_ID + ", "
                 + COLUMN_TITLE + ", "
@@ -76,20 +76,24 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_STAR + " FROM "
                 + TABLE_SONG;
 
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                String content = cursor.getString(1);
-                notes.add("ID:" + id + ", " + content);
+                String title = cursor.getString(1);
+                String singer = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int star = cursor.getInt(4);
+
+                Song song = new Song(title, singer, year, star);
+                songs.add(song);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return notes;
+        return songs;
     }
 
     public int updateSong(Song data) {

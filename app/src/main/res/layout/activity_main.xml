@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter song title here" />
+        android:hint="Enter song title here"
+        />
 
     <TextView
         android:id="@+id/tvSinger"
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter singers' name here" />
+        android:hint="Enter singers' name here" />
 
     <TextView
         android:id="@+id/tvYear"
@@ -48,7 +49,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter year of release here" />
+        android:hint="Enter year of release here" />
 
     <TextView
         android:id="@+id/tvStars"

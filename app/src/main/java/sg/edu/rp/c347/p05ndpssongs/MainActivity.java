@@ -3,6 +3,7 @@ package sg.edu.rp.c347.p05ndpssongs;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title = etTitle.getText().toString();
                 String singer = etSinger.getText().toString();
+                //int year = getYear();
                 int year = Integer.parseInt(etYear.getText().toString());
+                Log.d("---------", String.valueOf(year));
                 int star = getStars();
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 long row_affected = dbh.insertSong(title, singer, year, star);

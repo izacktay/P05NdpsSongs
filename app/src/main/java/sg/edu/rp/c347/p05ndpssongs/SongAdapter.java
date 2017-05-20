@@ -1,6 +1,7 @@
 package sg.edu.rp.c347.p05ndpssongs;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class SongAdapter extends ArrayAdapter<Song> {
-    private ArrayList<Song> song;
-    private Context context;
-    private TextView tvYear, tvSongTitle, tvSinger;
-    private ImageView ivIcon;
+    ArrayList<Song> song;
+    Context context;
+    //int resource;
+    TextView tvYear, tvSongTitle, tvSinger;
+    ImageView ivIcon, iv1, iv2, iv3, iv4, iv5;
 
     public SongAdapter(Context context, int resource, ArrayList<Song> objects){
         super(context, resource, objects);
         // Store the food that is passed to this adapter
-        song = objects;
+        this.song = objects;
+        //this.resource = resource;
         // Store Context object as we would need to use it later
         this.context = context;
     }
@@ -28,11 +31,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
     //  View object every time ListView needs a row
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // The usual way to get the LayoutInflater object to
-        //  "inflate" the XML file into a View object
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        // "Inflate" the row.xml as the layout for the View object
         View rowView = inflater.inflate(R.layout.row, parent, false);
 
         // Get the TextView object
@@ -42,17 +42,41 @@ public class SongAdapter extends ArrayAdapter<Song> {
         tvSinger = (TextView) rowView.findViewById(R.id.tvSinger);
         // Get the ImageView object
         ivIcon = (ImageView) rowView.findViewById(R.id.ivIcon);
+        iv1 = (ImageView) rowView.findViewById(R.id.imageView1Star);
+        iv2 = (ImageView) rowView.findViewById(R.id.imageView2Star);
+        iv3 = (ImageView) rowView.findViewById(R.id.imageView3Star);
+        iv4 = (ImageView) rowView.findViewById(R.id.imageView4Star);
+        iv5 = (ImageView) rowView.findViewById(R.id.imageView5Star);
 
 
         // The parameter "position" is the index of the
         //  row ListView is requesting.
         //  We get back the food at the same index.
         Song currentSong = song.get(position);
-        // Set the TextView to show the food
 
-        tvYear.setText(currentSong.getYear());
+        tvYear.setText(currentSong.getYear() + "");
         tvSinger.setText(currentSong.getSinger());
         tvSongTitle.setText(currentSong.getTitle());
+
+        if (currentSong.getStars() >= 5) {
+            iv5.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+        if (currentSong.getStars() >= 4) {
+            iv4.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+        if (currentSong.getStars() >= 3) {
+            iv3.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+        if (currentSong.getStars() >= 2) {
+            iv2.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+        if (currentSong.getStars() >= 1) {
+            iv1.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+
+        // Set the TextView to show the food
+
+
 
         // Set the image to star or nostar accordingly
         // Return the nicely done up View to the ListView

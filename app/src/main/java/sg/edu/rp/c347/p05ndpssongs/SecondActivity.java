@@ -10,25 +10,24 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 
     ListView lv;
-    ArrayAdapter aa;
-    ArrayList<Song> song;
+    SongAdapter aa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
         lv = (ListView) this.findViewById(R.id.lvSongs);
 
-        // Create a few food objects in Food array
-        song = new ArrayList<Song>();
-        food.add(new Food("Rocky Choc", true));
-        food.add(new Food("Kid Cat Choc", true));
+        DBHelper db = new DBHelper(SecondActivity.this);
+        ArrayList<Song> songs = db.getAllSongs();
 
-        // Link this Activity object, the row.xml layout for
-        //  each row and the food String array together
-        aa = new FoodAdapter(this, R.layout.row, food);
+        aa = new SongAdapter(SecondActivity.this, R.layout.row, songs);
         lv.setAdapter(aa);
+        aa.notifyDataSetChanged();
+        db.close();
+
     }
-   ...
+
 }
