@@ -42,12 +42,15 @@ public class Song implements Serializable{
         return stars;
     }
 
-//    @Override
-//    public String toString() {
-//        return "ID:" + _id + ", " + title;
+
+
+    @Override
+    public String toString() {
+        return "ID:" + _id + ", " + title;
+    }
+
+
+//    public String[] split(String s) {
 //    }
-
-
-
 }
 

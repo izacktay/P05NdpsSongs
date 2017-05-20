@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class SongAdapter extends ArrayAdapter<Song> {
     ArrayList<Song> song;
+    ArrayList<Song> fiveStarSong;
     Context context;
     //int resource;
     TextView tvYear, tvSongTitle, tvSinger;
@@ -20,15 +21,31 @@ public class SongAdapter extends ArrayAdapter<Song> {
 
     public SongAdapter(Context context, int resource, ArrayList<Song> objects){
         super(context, resource, objects);
-        // Store the food that is passed to this adapter
         this.song = objects;
-        //this.resource = resource;
-        // Store Context object as we would need to use it later
         this.context = context;
+
+        song = new ArrayList<Song>();
+        song.addAll(objects);
+        fiveStarSong = (ArrayList<Song>) song.clone();
+
+
     }
 
-    // getView() is the method ListView will call to get the
-    //  View object every time ListView needs a row
+    public void star5() {
+        filter5Star(0);
+    }
+
+    private void filter5Star(int star) {
+        fiveStarSong = new ArrayList<>();
+        for(Song fiveSong: song) {
+            if (fiveSong.getStars() == 5) {
+                fiveStarSong.add(fiveSong);
+            }
+        }
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
@@ -74,6 +91,12 @@ public class SongAdapter extends ArrayAdapter<Song> {
             iv1.setImageResource(android.R.drawable.btn_star_big_on);
         }
 
+
+
+
+
+
+
         // Set the TextView to show the food
 
 
@@ -82,4 +105,6 @@ public class SongAdapter extends ArrayAdapter<Song> {
         // Return the nicely done up View to the ListView
         return rowView;
     }
+
+
 }
